@@ -101,7 +101,7 @@ a:hover {
 
 .bs-docs-sidenav .active .icon-chevron-right,
 .bs-docs-sidenav .active a:hover .icon-chevron-right {
-  background-image: url(../css/img/glyphicons-halflings-white.png);
+  background-image: url(../../css/img/glyphicons-halflings-white.png);
   opacity: 1;
 }
 

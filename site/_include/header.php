@@ -18,6 +18,14 @@
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../css/bootstrap/layout.css" rel="stylesheet">
     <link href="../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap/boot-business.css" rel="stylesheet">
+    <link href="../css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
+    
+       <!-- Font awesome - iconic font with IE7 support --> 
+    <link href="../css/app/font-awesome.css" rel="stylesheet">
+    <link href="../css/app/font-awesome-ie7.css" rel="stylesheet">
     
     <!-- Java-Script -->
     <script src="../js/jquery/jquery.js" type="text/javascript"></script>

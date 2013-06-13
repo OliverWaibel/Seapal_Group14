@@ -15,9 +15,6 @@
 		<!-- Container -->
 		<div class="container-fluid">
 			
-			<!-- App Navigation -->
-			<?php include('_include/navigation_app.php'); ?>
-			
 			<!-- Content -->		
 			<div id="appWrapper" align="center">
 			    <br />
@@ -84,10 +81,94 @@
 			            		</div>
 		            		</div>
 		            	</div>      	 
-	            	</div>
+					
+					</form>
+				</div>
+	
+			    <br />
+			    <br />
+				
+				<br />
+			    <h2>Wetterinformationen</h2>
+			    <br />
+			    <div class="container-fluid" align="center">
+	            	<form class="form-horizontal"> 
+						<!-- Hier kann man auf row-fluid ändern, damit es auf 12 Spalten gesetzt wird-->
+		            	<div class="row well" style="margin-left: 15%;" align="center">
+						
+						
+		            		<div class="span4" align="center">	            		
+			            		<div class="control-group">
+			            			<label class="control-label">Windstärke</label>
+			            			<input class="input-medium" type="text" id="windstaerke"/>
+			            		</div>
+			            		<div class="control-group">
+			            			<label class="control-label">Windrichtung</label>
+										<select name="wdirection" id="wdirection" style="width: 165px;">
+                                            <option value="north">north</option>
+                                            <option value="east">east</option>
+                                            <option value="south">south</option>
+                                            <option value="west">west</option>
+                                            <option value="north-east">north-east</option>
+                                            <option value="south-east">south-east</option>
+                                            <option value="south-west">south-west</option>
+                                            <option value="north-west">north-west</option>
+                                        </select>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">Luftdruck</label>
+			            			<input class="input-medium" type="text" id="luftdruck"/>
+			                    </div>
+		            		</div>
+		            		<div class="span4">
+		            			<div class="control-group">
+			            			<label class="control-label">Temperatur</label>
+			            			<input class="input-medium" type="text" id="temperatur"/>
+			            		</div>
+			            		<div class="control-group">
+			            			<label class="control-label">Wolken</label>
+			            			<input class="input-medium" type="text" id="wolken"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">Regen</label>
+										<select name="rain" id="rain" style="width: 165px;">
+                                            <option value="rain_yes">yes</option>
+                                            <option value="rain_no">no</option>
+                                        </select>
+			                    </div>
+		            		</div>
+		            		<div class="span4">
+		            			<div class="control-group">
+			            			<label class="control-label">Wellenhöhe</label>
+			            			<input class="input-medium" type="text" id="wellenhoehe"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">Wellenrichtung</label>
+										<select name="wavedirection" id="wavedirection" style="width: 165px;">
+                                            <option value="north">north</option>
+                                            <option value="east">east</option>
+                                            <option value="south">south</option>
+                                            <option value="west">west</option>
+                                            <option value="north-east">north-east</option>
+                                            <option value="south-east">south-east</option>
+                                            <option value="south-west">south-west</option>
+                                            <option value="north-west">north-west</option>
+                                        </select>
+			                    </div>
+			                    <form action="../templates/db_storage-php"><button>Aufzeichnung speichern</button></form>              
+		            		</div>
+							<div class="span4">
+		            			<div class="control-group">
+		            				<!-- DateTimePicker JQuery-->
+			            			<label class="control-label">Datum und Uhrzeit der Aufzeichnung</label>
+			            			<input class="input-medium"  type="text" id="datetimepicker" />
+			                    </div>
+			        			<form><button>Aufzeichnung laden</button></form> 
+		            		</div>
+		            		
+		            	</div>    
+					</form>
 	            </div>
-			    <br />
-			    <br />
 			    <div class="container" align="center">
 			    <div class="row" style="margin-left:5%;">
 			        <div class="span4" id="appNotes">
@@ -96,7 +177,7 @@
 			        </div>
 			        <div class="span4" id="markerMap">
 			        	<h4>Map</h4>
-			            <img src="../img/icons/marker_map.png" id="appInfoPhoto" style="width:100%; heigt: 100%;"/>
+			        	<iframe style="width:96%; height:360px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="map.html"></iframe><br /><small><a href="map.html" style="color:#0000FF;text-align:left">Größere Kartenansicht</a></small>
 			        </div>
 			        <div class="span4" id="appPhotos">
 			        	<h4>Photos</h4>

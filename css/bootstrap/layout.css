@@ -4,10 +4,10 @@ body {
     padding-top: 110px;
 }
 
-.navbar-inner#navigation {
+/*.navbar-inner#navigation {
     min-height: 80px;
 }
-
+*/
 label.control-label {
     width: 80px;
 }

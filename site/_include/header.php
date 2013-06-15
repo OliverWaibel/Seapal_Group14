@@ -20,5 +20,13 @@
     <link href="../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
     
     <!-- Java-Script -->
-    <script src="../js/jquery/jquery.js" type="text/javascript"></script>
+
     <script src="../js/site/scroll.js" type="text/javascript"></script>   
+    <script src="../js/app/map/map_weather.js" type="text/javascript"></script>
+    <script src="../js/app/map/WeatherOverlay.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript"src="http://openweathermap.org/js/OWM.GoogleMap.1.0.js"></script>
+    
+

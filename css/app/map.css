@@ -94,3 +94,42 @@ label {
     margin-left: 7px;
 }
 
+#weatherDisplayBox {
+			color: white;
+			background:hsla(0,0%,0%,0.6);
+			border-top-left-radius: 20pt 20pt;
+  			border-top-right-radius: 20pt 20pt;
+  			border-bottom-right-radius: 20pt 20pt;
+  			border-bottom-left-radius: 20pt 20pt;
+  			padding: 5px;
+			z-index: 10;
+			position: relative;
+			width: 450px;
+}
+
+#weatherOptions {
+    padding: 10px 10px 10px 10px;
+    box-shadow: 5px 5px 15px #424242;
+    height: 135px;
+    width: 120px;
+    text-indent: -10px;
+    border: 1px solid #717B87;
+    color: white;
+    background:hsla(0,0%,0%,0.6);
+    border-top-left-radius: 20pt 20pt;
+  	border-top-right-radius: 20pt 20pt;
+  	border-bottom-right-radius: 20pt 20pt;
+  	border-bottom-left-radius: 20pt 20pt;
+    margin-right: 5px;
+}
+
+#weatherOptions label {
+    color: white;
+    cursor: pointer;
+}
+
+#weatherOptions .checkbox input[type="checkbox"] {
+    float: left;
+    margin-left: -30px;
+}
+

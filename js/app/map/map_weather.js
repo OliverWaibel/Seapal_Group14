@@ -1,8 +1,34 @@
 var weatherLogIntervall = null;
 var inserTimeMin = 15 * 1000 * 60; //value in ms -> time x 6000 = Minut.
 var currentTripToLog = 1;
+var markersArray;
 //test for jenkins
 
+function getWeatherInformation(name) {
+	$.ajax({
+        url: "http://openweathermap.org/data/2.5/weather?q=" + name + "&mode=json&units=metric",
+        type: "GET", dataType: 'jsonp',
+        crossDomain: true
+    }).done(function(data) {
+    	
+    	data = correctWeatherData(data);
+    	data = data.list[0];
+    	
+    	
+    	
+    				$("#tempData").text(data.temp.day.toFixed(0) + "°");
+           			$("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
+                    $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
+                    $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
+                    $("#windStrData").text(bftIdToBftDescription(data.speed));
+                    $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
+                    $("#rainData").text(", " + rainIdTorainDescription(data.rain));
+                    $("#cloudsData").text(CloudIdToDescription(data.clouds));
+                    $("#nameData").text(data.name);
+                    $("#time").text("");
+                     // $("#weatherDisplayBox").css("background-image", "url(http://openweathermap.org/"+data.weather[0].icon+")");
+    });
+}
 
 function handleWeather(time, target, timespan) {
     /*
@@ -29,7 +55,7 @@ function handleWeather(time, target, timespan) {
                     var whight = 0;
                     var urlString = "trip=" + currentTripToLog + "&wId=&temp=" + data.temp.day + "&airpress=" + data.pressure + "&wind_strength=" + data.speed
                             + "&whight=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" + data.deg + "&wave_direction=" + wave_direction;
-                    handleWeatherForm(urlString, true);
+                   // handleWeatherForm(urlString, true);
                 } else if (target == "box") {
                     $("#tempData").text(data.temp.day.toFixed(0) + "°");
                     $("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
@@ -547,19 +573,6 @@ function parseDate(d) {
 
 var icon;
 
-function getIcon(city_name){
-		var myhre = 'http://openweathermap.org/data/2.5/weather?q='
-		 +city_name
-			+"&callback=?";
-		// $.getJSON(myhre, getIcon);
-		$.getJSON(myhre,function(data){
-			setIconPath(data.weather[0].icon);
-		});
-}
 
-function setIconPath() {
-	
-}
-// function getIcon(data){
-	// return data.weather[0].icon;
-// }
+
+

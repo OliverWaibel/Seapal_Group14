@@ -403,7 +403,7 @@ function initialize() {
    				 		document.getElementById('weatherDisplayBox').style.display = "block";
 						document.getElementById('weatherDisplayBox').style.visibility = "visible";
    				 	
-   				 		getWeatherInformation(name);
+   				 		getWeatherInformation(name, "weather");
    				 		
    				 		
    				 	// $('#weather_icon').html('<div><img src="http://openweathermap.org'+icon+'" height="50px" width="60px" style="float: left; "></div>');
@@ -443,6 +443,25 @@ function initialize() {
 		
 }
 
+
+// Forcast for Wetherinformation
+$('#now').click(function() {
+    getWeatherInformation("Konstanz", "weather");
+});
+$("#today").click(function() {
+    getWeatherInformation("Konstanz", "forecast");
+});
+$("#tomorrow").click(function() {
+    getWeatherInformation("Konstanz", "forecast/daily");
+});
+$("#3days").click(function() {
+    getWeatherInformation("Konstanz", "forecast/daily");
+});
+$("#7days").click(function() {
+    getWeatherInformation("Konstanz", "forecast/daily");
+});
+
+
 // Map Overlays ------------------------------------------------ //
 $('.weatherO').click(function() {
     var layerID = parseInt($(this).val());
@@ -456,6 +475,9 @@ $('.weatherO').click(function() {
         }
     }
 });
+
+
+
 // temporary marker context menu ----------------------------------------- //
 $(function () {
     $.contextMenu({

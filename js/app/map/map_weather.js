@@ -4,29 +4,49 @@ var currentTripToLog = 1;
 var markersArray;
 //test for jenkins
 
-function getWeatherInformation(name) {
+function getWeatherInformation(name, type) {
 	$.ajax({
-        url: "http://openweathermap.org/data/2.5/weather?q=" + name + "&mode=json&units=metric",
+        url: "http://openweathermap.org/data/2.5/"+type+"?q=" + name + "&mode=json&units=metric",
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
-    	
     	data = correctWeatherData(data);
-    	data = data.list[0];
+    	
+    	if(type == "weather"){
+    		data = data.list[0];
+    		
+    		$("#tempData").text(data.temp.day.toFixed(0) + "°");
+           	$("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
+            $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
+            $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
+            $("#windStrData").text(bftIdToBftDescription(data.speed));
+            $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
+            $("#rainData").text(", " + rainIdTorainDescription(data.rain));
+            $("#cloudsData").text(CloudIdToDescription(data.clouds));
+            $("#nameData").text(data.name);
+            $("#time").text("");
+         // $("#weatherDisplayBox").css("background-image", "url(http://openweathermap.org/"+data.weather[0].icon+")");
+    	}else {
+    			if ($("#today").hasClass("active"))
+                {
+                    setInformationFields(data.list[1]);
+                }
+                else if ($("#tomorrow").hasClass(("active")))
+                {
+                    setInformationFields(data.list[1]);
+                }
+                else if ($("#3days").hasClass("active"))
+                {
+                    setInformationFields(data.list[2]);
+                }
+                else if ($("#7days").hasClass("active"))
+                {
+                    setInformationFields(data.list[6]);
+                }
+    	}
     	
     	
-    	
-    				$("#tempData").text(data.temp.day.toFixed(0) + "°");
-           			$("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
-                    $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
-                    $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
-                    $("#windStrData").text(bftIdToBftDescription(data.speed));
-                    $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
-                    $("#rainData").text(", " + rainIdTorainDescription(data.rain));
-                    $("#cloudsData").text(CloudIdToDescription(data.clouds));
-                    $("#nameData").text(data.name);
-                    $("#time").text("");
-                     // $("#weatherDisplayBox").css("background-image", "url(http://openweathermap.org/"+data.weather[0].icon+")");
+    				
     });
 }
 
@@ -503,7 +523,7 @@ function checkRain(icon, rain) {
         icon = "_8";
 }
 
-function getForecast(data) {
+function setInformationFields(data) {
     $("#tempData").text(data.temp.day.toFixed(0) + "°");
     $("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
     $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
@@ -514,7 +534,7 @@ function getForecast(data) {
     $("#cloudsData").text(CloudIdToDescription(data.clouds));
     $("#nameData").text(data.name);
     $("#time").text(data.dt);
-    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
+    //$("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
 }
 
 

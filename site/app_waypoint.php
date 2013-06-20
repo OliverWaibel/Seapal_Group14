@@ -161,7 +161,7 @@
 		            			<div class="control-group">
 		            				<!-- DateTimePicker JQuery-->
 			            			<label class="control-label">Datum und Uhrzeit der Aufzeichnung</label>
-			            			<input class="input-medium"  type="text" id="datetimepicker" />
+			            			<input class="input-medium"  type="text" id="datetime" />
 			                    </div>
 			        			<form><button>Aufzeichnung laden</button></form> 
 		            		</div>

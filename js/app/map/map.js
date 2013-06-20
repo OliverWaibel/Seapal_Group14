@@ -28,6 +28,9 @@ var fixedMarkerArray = new Array();
 
 var selectedMarker = null;
 
+var lat = 0;
+var lng = 0;
+
 var currentPositionMarkerImage = new google.maps.MarkerImage('../img/icons/boat.png',
     new google.maps.Size(50, 50), //size
     new google.maps.Point(0, 0),  //origin point
@@ -251,7 +254,12 @@ function initialize() {
     google.maps.event.addListener(map, 'center_changed', function () {
         if (followCurrentPosition && !noToggleOfFollowCurrentPositionButton) {
             toggleFollowCurrentPosition();
+            if(map.getMapTypeId() == "Wetterkarte"){
+	            lat = map.getCenter().lat();
+	            lng = map.getCenter().lng();
+	           }
         } else {
+        	 
             noToggleOfFollowCurrentPositionButton = false;
         }
     });
@@ -375,6 +383,8 @@ function initialize() {
 				//var m = new WeatherOverlay(p, map, html_b);
 				marker.station_id = i;
 				marker.name =name;
+				marker.lat = station_list.list[i].lat,
+				marker.lng = station_list.list[i].lng;
 				
 				// marker.icon=img;
 
@@ -397,13 +407,22 @@ function initialize() {
    				 var name=weathermarker[i].name;
    				 var icon=weathermarker[i].icon;
    				 
+				var latTest = weathermarker[i].lat;
+				var lngTest = weathermarker[i].lng;
+				
+				
+   				 
    						 
    				 google.maps.event.addListener(weathermarker[i], 'click', function() {
    				 	
    				 		document.getElementById('weatherDisplayBox').style.display = "block";
 						document.getElementById('weatherDisplayBox').style.visibility = "visible";
+						
+						lat = latTest;
+						lng = lngTest;
    				 	
-   				 		getWeatherInformation(name, "weather");
+   				 
+   				 		getWeatherInformation(lat, lng, "weather");
    				 		
    				 		
    				 	// $('#weather_icon').html('<div><img src="http://openweathermap.org'+icon+'" height="50px" width="60px" style="float: left; "></div>');
@@ -445,20 +464,25 @@ function initialize() {
 
 
 // Forcast for Wetherinformation
+
 $('#now').click(function() {
-    getWeatherInformation("Konstanz", "weather");
+    getWeatherInformation(lat, lng, "weather");
 });
 $("#today").click(function() {
-    getWeatherInformation("Konstanz", "forecast");
+    getWeatherInformation(lat, lng, "forecast");
 });
 $("#tomorrow").click(function() {
-    getWeatherInformation("Konstanz", "forecast/daily");
+    getWeatherInformation(lat, lng, "forecast/daily");
 });
 $("#3days").click(function() {
-    getWeatherInformation("Konstanz", "forecast/daily");
+    getWeatherInformation(lat, lng, "forecast/daily");
 });
 $("#7days").click(function() {
-    getWeatherInformation("Konstanz", "forecast/daily");
+	
+    getWeatherInformation(lat, lng, "forecast/daily");
+});
+$("#close_btn").click(function() {
+	$("#weatherDisplayBox").slideUp("slow");
 });
 
 
@@ -693,9 +717,14 @@ function toggleFollowCurrentPosition() {
     followCurrentPosition = !followCurrentPosition;
     if (followCurrentPosition) {
         document.getElementById("followCurrentPositionbutton").value = "Eigener Position nicht mehr folgen";
+        if(map.getMapTypeId() == "Wetterkarte"){
+	        document.getElementById('weatherDisplayBox').style.display = "block";
+		    document.getElementById('weatherDisplayBox').style.visibility = "visible";
+	    }
         noToggleOfFollowCurrentPositionButton = true;
         map.setCenter(currentPositionMarker.getPosition());
     } else {
+    	document.getElementById('weatherDisplayBox').style.display = "none";
         document.getElementById("followCurrentPositionbutton").value = "Eigener Position folgen";
     }
     document.getElementById('followCurrentPositionContainer').style.width = document.body.offsetWidth + "px";

@@ -58,15 +58,17 @@
                     <button id="today" class="btn btn-info span1">Heute</button>
                     <button id="tomorrow" class="btn btn-info span1">Morgen</button>
                     <button id="3days" class="btn btn-info span1">3 Tage</button>
-                    <button id="7days" class="btn btn-info span1">7 Tage</button>
+                   <!-- <button id="7days" class="btn btn-info span1">7 Tage</button> -->
+                   <button id="close_btn" class="btn btn-info span1">Schließen</button>
                 </div>
+                <div align="center" id="nameData" class="data" style=""></div>
                 <div id="weatherDisplayTop">
                     <div align="center" style="width: 140px; height: 80px; float: left;">
                         <div id="tempDataMax" class="data" style=""></div>
-                        <div id="nameData" class="data" style=""></div>
                         <div id="tempDataMin" class="data" style=""></div>
                     </div>
                     <div id="tempData" class="data" style=""></div>
+                    <div id="weatherIcon" class="data" style=""></div>
                     <div id="time" class="data" style="padding-top: 18px; text-align: right;"></div>
                 </div>
                 <div class="clearfix"></div>

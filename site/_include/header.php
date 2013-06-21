@@ -18,8 +18,6 @@
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../css/bootstrap/layout.css" rel="stylesheet">
     <link href="../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
-    <link href="../css/app/datetimepicker.css" rel="stylesheet">
-	<link rel="stylesheet" href="../css/app/jquery-ui-1.10.3.custom.css" />
     
     <!-- Java-Script -->
 
@@ -30,7 +28,5 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript"src="http://openweathermap.org/js/OWM.GoogleMap.1.0.js"></script>
-    <script type="text/javascript" src="../js/jquery/jquery-ui-timepicker-addon.js"></script>
-	<script type="text/javascript" src="../js/site/datetimepicker.js"></script>
     
 

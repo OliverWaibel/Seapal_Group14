@@ -194,9 +194,14 @@
 	    <script src="../js/bootstrap/bootstrap-button.js"></script>
 	    <script src="../js/bootstrap/bootstrap-collapse.js"></script>
 	    <script src="../js/bootstrap/bootstrap-affix.js"></script>
+	    <link href="../css/app/datetimepicker.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/app/jquery-ui-1.10.3.custom.css" />
 		
 		<!-- Additional Java-Script -->
 		<script src="../js/app/ajax/waypoint.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../js/jquery/jquery-ui.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="../js/site/datetimepicker.js"></script>
 		
 	</body>
 </html>

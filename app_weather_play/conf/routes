@@ -4,6 +4,8 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+
+# WetterInfo
 POST    /wetterinfos                controllers.Application.addWetterInfo()
 GET     /wetterinfos                controllers.Application.getWetterInfo()
 

@@ -1,7 +1,9 @@
-@(message: String)
+@(wetterinfos: WetterInfos)
 
-@main("Welcome to Play 2.1") {
+@import helper._
 
+@main("WetterInfo") {
+	
     <form action="@routes.Application.addWetterInfo()" method="post">
         <input type="text" name="windstaerke" id="windstaerke"> <br>
         <input type="text" name="wdirection" id="wdirection"> <br>
@@ -14,4 +16,6 @@
         <input type="text" name="datetime" id="datetime"> <br>
         <input type="submit">
     </form>
+    
+    
 }

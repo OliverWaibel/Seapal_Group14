@@ -9,15 +9,21 @@ import javax.persistence.Id;
 public class WetterInfo extends Model {
 
     @Id
-    public String id;
+    public int id;
 
     public String windstaerke;
-    public String wdirection;
+    public String windrichtung;
     public String luftdruck;
     public String wellenhoehe;
-    public String wavedirection;
+    public String wellenrichtung;
     public String temperatur;
     public String wolken;
-    public String rain;
-    public String datetime;
+    public String regen;
+    public String datumuhrzeit;
+    
+    public WetterInfo() {}
+    
+    public WetterInfo(int id) {
+    	this.id = id;
+    }
 }

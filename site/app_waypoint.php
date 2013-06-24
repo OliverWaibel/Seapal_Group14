@@ -155,7 +155,7 @@
                                             <option value="north-west">north-west</option>
                                         </select>
 			                    </div>
-			                    <form action="../templates/db_storage-php"><button>Aufzeichnung speichern</button></form>              
+			                          
 		            		</div>
 							<div class="span4">
 		            			<div class="control-group">
@@ -163,7 +163,6 @@
 			            			<label class="control-label">Datum und Uhrzeit der Aufzeichnung</label>
 			            			<input class="input-medium"  type="text" id="datetime" />
 			                    </div>
-			        			<form><button>Aufzeichnung laden</button></form> 
 		            		</div>
 		            		
 		            	</div>    

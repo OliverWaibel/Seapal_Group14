@@ -1,0 +1,211 @@
+@(wetterinfos: WetterInfos)
+
+@import helper._
+
+@main("WetterInfo") {
+	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script>
+	
+	var selectedIndex;
+    	var highestIndex = @wetterinfos.getSize()-1;
+    	
+    	$(function() {
+    		updateTable();
+    	});
+    	
+    	function updateTable() {
+    		var s = "";
+    		@for(wetterinfo <- wetterinfos.getList) {
+					s = s + "<tr class=\"wetterinfo_table_nolink\" id=@wetterinfos.getIndex(wetterinfo) onMouseOver=\"javaScript:updateStyle(this.id)\" onMouseOut=\"javaScript:updateStyle(this.id)\" onClick=\"javaScript:updateVariables(this.id)\">"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.windstaerke</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.windrichtung</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.luftdruck</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.wellenhoehe</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.wellenrichtung</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.temperatur</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.wolken</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.regen</td>"
+						+ "<td class=\"wetterinfo_table_row\">@wetterinfo.datumuhrzeit</td>"
+						+ "<td class=\"wetterinfo_table_row\" style=\"text-align: center\">"
+						+ "<input type=\"image\" src=\"/assets/images/button.png\">"
+						+ "</td>"
+						+ "</tr>"		
+				}
+			var list = document.getElementById('list');
+			list.innerHTML = s;
+    	}
+    	
+    	function updateStyle(index) {
+    		if (document.getElementById(index).className=='wetterinfo_table_link_click') {
+				document.getElementById(index).className='wetterinfo_table_link_click';
+			}
+		
+			if (document.getElementById(index).className=='wetterinfo_table_nolink') {
+				document.getElementById(index).className='wetterinfo_table_link';
+			} else if (document.getElementById(index).className=='wetterinfo_table_link') {
+				document.getElementById(index).className='wetterinfo_table_nolink';
+			}
+    	} 	
+    	
+    	function updateVariables(i) {
+			selectedIndex = i;
+			changeOtherElements(i);
+			updateForm(i);
+			if (document.getElementById(i).className=='wetterinfo_table_link') {
+				document.getElementById(i).className='wetterinfo_table_link_click';
+			}	
+    	}
+    	
+    	function changeOtherElements(i) {
+			for (var j = 0; j <= highestIndex; j++) {
+				if (j == i) {
+		   			document.getElementById(i).className='wetterinfo_table_link_click';
+				} else {
+					document.getElementById(j).className='wetterinfo_table_nolink';
+				}
+			}
+		}
+    	
+    	function next() {
+    		selectedIndex++;
+    		if (selectedIndex >= highestIndex) {
+    			selectedIndex = highestIndex;
+    		}
+			changeOtherElements(selectedIndex);
+			updateForm(selectedIndex);
+			if (document.getElementById(selectedIndex).className=='wetterinfo_table_link') {
+				document.getElementById(selectedIndex).className='wetterinfo_table_link_click';
+			}	
+    	}
+    	
+    	function previous() {
+    		selectedIndex--;
+    		if (selectedIndex < 0) {
+    			selectedIndex = 0;
+    		}
+			changeOtherElements(selectedIndex);
+			updateForm(selectedIndex);
+			if (document.getElementById(selectedIndex).className=='wetterinfo_table_link') {
+				document.getElementById(selectedIndex).className='wetterinfo_table_link_click';
+			}	
+    	}
+    	
+    	function latest() {
+    		selectedIndex = @wetterinfos.getIndex(wetterinfos.gethighestID());
+    		changeOtherElements(selectedIndex);
+			updateForm(selectedIndex);
+			if (document.getElementById(selectedIndex).className=='wetterinfo_table_link') {
+				document.getElementById(selectedIndex).className='wetterinfo_table_link_click';
+			}
+    	}
+    	    	
+    	function updateForm(i) {
+    		$.getJSON('/get_wetterinfo',
+    			 	 {'idx': i},
+    			  		function(data) {
+							document.getElementsByName('windstaerke')[0].value = data.windstaerke;
+							document.getElementsByName('windrichtung')[0].value = data.windrichtung;
+							document.getElementsByName('luftdruck')[0].value = data.luftdruck;
+					  	    document.getElementsByName('wellenhoehe')[0].value = data.wellenhoehe;
+							document.getElementsByName('wellenrichtung')[0].value = data.wellenrichtung;
+							document.getElementsByName('temperatur')[0].value = data.temperatur;
+							document.getElementsByName('wolken')[0].value = data.wolken;
+							document.getElementsByName('regen')[0].value = data.regen;
+					  		document.getElementsByName('datumuhrzeit')[0].value = data.datumuhrzeit;
+						});
+    		}
+	
+    function delete_WetterInfo() {
+    			$.get('/delete_wetterinfos',
+				      {'idx': selectedIndex},
+				      function(data) {
+				      	  window.alert("Eintrag " + data + " wurde erfolgreich gelöscht");
+				      	  window.open('http://localhost:9000/wetterInfo', "_self");
+				      })
+				      .error(function(data) {
+				      	alert("Error: " + data);
+				      });	
+    		}
+
+	function insert_WetterInfo() {
+    			var info = {
+    				windstaerke: 			document.getElementsByName('winstaerke')[0].value,
+					windrichtung: 			document.getElementsByName('windrichtung')[0].value,
+					luftdruck:				document.getElementsByName('luftdruck')[0].value,
+			  	    wellenhoehe: 			document.getElementsByName('wellenhoehe')[0].value,
+					wellenrichtung: 		document.getElementsByName('wellenrichtung')[0].value,
+					temperatur:				document.getElementsByName('temperatur')[0].value,
+					wellen:					document.getElementsByName('wellen')[0].value,
+					regen: 					document.getElementsByName('regen')[0].value,
+			  		datumuhrzeit: 			document.getElementsByName('datumuhrzeit')[0].value,		
+    			};
+    			$.post('/add_wetterinfo',
+	    				info,
+					   function(data) {
+					   		alert(data);
+					   		// Seite neu laden
+					   		window.open('http://localhost:9000/wetterInfo', "_self");
+					   }).error(function(data) {
+				      		alert("Error: " + data);
+				      });	
+    		}
+</script>
+
+<h1 style="text-align: center">WetterInfo</h1>
+    <link href='@routes.Assets.at("stylesheets/style.css")' rel="stylesheet" type="text/css" media="screen"/>
+    <div class="wetterinfo">
+		<table id="wetterinfo_table">
+			<tr>
+				<td><label for="windstaerke">Windstärke</label></td>
+				<td><input type="text" name="windstaerke" id="windstaerke" onkeyup="isText(this.value, this.id, 0)" /></td>
+				<td><label for="windrichtung">Windrichtung</label></td>
+				<td><input type="text" name="windrichtung" id="windrichtung" onkeyup="isText(this.value, this.id, 0)" /></td>
+				<td><label for="luftdruck">Luftdruck</label></td>
+				<td><input type="text" name="luftdruck" id="luftdruck" onkeyup="isText(this.value, this.id, 4)" /></td>
+			</tr>
+			<tr>
+				<td><label for="wellehoehe">Wellenhöhe</label></td>
+				<td><input type="text" name="wellenhoehe" id="wellenhoehe" onkeyup="isText(this.value, this.id, 0)" /></td>
+				<td><label for="wellenrichtung">Wellenrichtung</label></td>
+				<td><input type="text" name="wellenrichtung" id="wellenrichtung" onkeyup="isText(this.value, this.id, 0)" /></td>
+				<td><label for="temperatur">Temperatur</label></td>
+				<td><input type="text" name="temperatur" id="temperatur" onkeyup="isText(this.value, this.id, 0)" /></td>
+			</tr>
+			<tr>
+				<td><label for="wolken">Wolken</label></td>
+				<td><input type="text" name="wolken" id="wolken" onkeyup="isText(this.value, this.id, 0)" /></td>
+				<td><label for="regen">Regen</label></td>
+				<td><input type="text" name="regen" id="regen" onkeyup="isText(this.value, this.id, 0)" /></td>
+				<td><label for="datumuhrzeit">Datum/Uhrzeit</label></td>
+				<td><input type="text" name="datumuhrzeit" id="datumuhrzeit" onkeyup="isText(this.value, this.id, 0)" /></td>
+			</tr>
+		</table>
+
+		<table id="wetterinfo_list" border="0">
+			<thead>
+				<td class="wetterinfo_table_header">Windstärke</td>
+				<td class="wetterinfo_table_header">Windrichtung</td>
+				<td class="wetterinfo_table_header">Luftdruck</td>
+				<td class="wetterinfo_table_header">Wellenhöhe</td>
+				<td class="wetterinfo_table_header">Wellenrichtung</td>
+				<td class="wetterinfo_table_header">Temperatur</td>
+				<td class="wetterinfo_table_header">Wolken</td>
+				<td class="wetterinfo_table_header">Regen</td>
+				<td class="wetterinfo_table_header">Datum/Uhrzeit</td>
+   			</thead>
+			<tbody id="list">
+				
+			</tbody>
+		</table>
+
+		<!-- Buttons -->
+		<div id="wetterinfo_buttons">
+			<button id="delete" onclick="javascript:delete_WetterInfo()">Löschen</button>
+			<button id="save" onclick="javascript:insert_WetterInfo()">Speichern</button>
+			<button id="latest" onclick="javascript:latest()">Neuester</button>
+			<button id="previous" onclick="javascript:previous()">Vorheriger</button>
+			<button id="next" onclick="javascript:next()">Nächster</button>
+		</div>
+	</div>}

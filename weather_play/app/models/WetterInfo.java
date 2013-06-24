@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class WetterInfo extends Model {
+public class WetterInfo {
 
     @Id
     public int id;

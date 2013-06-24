@@ -158,8 +158,8 @@ public class WetterInfos {
 				 + ", regen = \"" + m.get("regen")[0] + "\""
 				 + " WHERE datumuhrzeit = " + m.get("datumuhrzeit")[0];
 		} else {
-			sql = "INSERT INTO wetter_info (windstaerke, windrichtung, luftdruck, wellenhoehe, " +
-					"wellenrichtung, temperatur, wolken, regen, datumuhrzeit) VALUES (\""
+			sql = "INSERT INTO `wetter_info` (`windstaerke`, `windrichtung`, `luftdruck`, `wellenhoehe`, " +
+					"`wellenrichtung`, `temperatur`, `wolken`, `regen`, `datumuhrzeit`) VALUES (\""
 				 + m.get("windstaerke")[0] + "\",\""
 				 + m.get("windrichtung")[0] + "\",\""
 				 + m.get("luftdruck")[0] + "\",\""
